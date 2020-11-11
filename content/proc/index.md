@@ -1,0 +1,1 @@
+# Proč odejít ze školy

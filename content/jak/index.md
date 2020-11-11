@@ -1,0 +1,1 @@
+# Jak odejít ze školy
