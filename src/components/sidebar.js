@@ -13,7 +13,7 @@ const ItemSublist = ({ pageDict, url, items, currentUrl }) => {
           </Link>
         )
       ) : (
-        `page ${url} doesn't exist`
+        <i>{url}</i>
       )}
       {items?.length && (
         <ul>
@@ -45,10 +45,10 @@ const Sidebar = ({ location }) => {
       contentYaml {
         content {
           items {
+            url
             items {
               url
             }
-            url
           }
           url
         }
@@ -89,19 +89,21 @@ const Sidebar = ({ location }) => {
           <Link to={"/" + locationRoot}>{sidebarTitle}</Link>
         )}
       </header>
-      <ul>
-        {sidebarList.items.map(({ url, items }) => (
-          <ItemSublist
-            {...{
-              pageDict,
-              url: sidebarList.url + "/" + url,
-              items,
-              currentUrl: locationFormatted,
-            }}
-            key={url}
-          />
-        ))}
-      </ul>
+      {sidebarList.items && (
+        <ul>
+          {sidebarList.items.map(({ url, items }) => (
+            <ItemSublist
+              {...{
+                pageDict,
+                url: sidebarList.url + "/" + url,
+                items,
+                currentUrl: locationFormatted,
+              }}
+              key={url}
+            />
+          ))}
+        </ul>
+      )}
     </nav>
   )
 }

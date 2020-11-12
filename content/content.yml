@@ -1,17 +1,20 @@
 content:
   - url: proc
     items:
-      - url: test1
+      - url: svoboda
+      - url: nuda
   - url: jak
-    items:
-      - url: test4
   - url: venku
     items:
-      - url: test5
+      - url: uceni
         items:
-          - url: test9
-      - url: test06
+          - url: knihovny
+          - url: skola
+          - url: veda
+          - url: spolecenske-vedy
+          - url: matematika
+          - url: cesky-jazyk
+          - url: cizy-jazyky
+          - url: umeni
+          - url: sport-a-atletika
   - url: spolecne
-    items:
-      - url: test7
-      - url: test8

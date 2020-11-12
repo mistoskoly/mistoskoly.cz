@@ -1,0 +1,1 @@
+# Ve škole je nuda
