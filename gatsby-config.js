@@ -27,7 +27,7 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
-    'gatsby-transformer-yaml',
+    "gatsby-transformer-yaml",
     /*
     {
       resolve: "gatsby-plugin-page-creator",
@@ -39,8 +39,8 @@ module.exports = {
     {
       resolve: "gatsby-plugin-mdx",
       options: {
-        extensions: ['.mdx', '.md'],
-      }
+        extensions: [".mdx", ".md"],
+      },
     },
   ],
 }

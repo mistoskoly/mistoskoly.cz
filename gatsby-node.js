@@ -6,16 +6,16 @@
 
 // You can delete this file if you're not using it
 //
-const path = require('path');
-const { createFilePath } = require('gatsby-source-filesystem');
+const path = require("path")
+const { createFilePath } = require("gatsby-source-filesystem")
 
-exports.onCreateNode = ({ node, actions, getNode}) => {
+exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
   if (node.internal.type === "Mdx") {
-    const value = createFilePath({ node, getNode });
+    const value = createFilePath({ node, getNode })
     createNodeField({
-      name: 'slug',
+      name: "slug",
       node,
       value,
     })
@@ -23,7 +23,7 @@ exports.onCreateNode = ({ node, actions, getNode}) => {
 }
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
-  const { createPage } = actions;
+  const { createPage } = actions
 
   const result = await graphql(`
     query {
@@ -38,20 +38,20 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         }
       }
     }
-  `);
+  `)
 
   if (result.errors) {
-    reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query');
+    reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query')
   }
 
   const posts = result.data.allMdx.edges
 
   posts.forEach(({ node }, index) => {
-    console.log(node.fields.slug);
+    console.log(node.fields.slug)
     createPage({
       path: node.fields.slug,
-      component: path.resolve('./src/components/page-layout.js'),
+      component: path.resolve("./src/components/page-layout.js"),
       context: { id: node.id },
     })
-  });
+  })
 }
