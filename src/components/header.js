@@ -1,5 +1,6 @@
 import { Link, useStaticQuery, graphql } from "gatsby"
 import React from "react"
+import logo from "../images/logo.png"
 
 const Header = ({ location }) => {
   const data = useStaticQuery(graphql`
@@ -43,8 +44,29 @@ const Header = ({ location }) => {
 
   return (
     <header style={{ backgroundColor: "yellow", padding: "1rem" }}>
-      <nav style={{ display: "flex", justifyContent: "space-around" }}>
-        <Link to="/">místoškoly.cz</Link>
+      <nav
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          alignItems: "center",
+        }}
+      >
+        <Link
+          to="/"
+          style={{
+            display: "flex",
+            flexWrap: "nowrap",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <img
+            src={logo}
+            alt="logo"
+            style={{ height: "2rem", width: "2rem", marginRight: "0.5rem" }}
+          />{" "}
+          místoškoly.cz
+        </Link>
         {headerItems.map(({ url, title }) =>
           url === locationRoot ? (
             <span key={url}>{title}</span>

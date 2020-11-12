@@ -1,13 +1,17 @@
 import React from "react"
 import { useStaticQuery, graphql, Link } from "gatsby"
 
-const ItemSublist = ({ pageDict, url, items }) => {
+const ItemSublist = ({ pageDict, url, items, currentUrl }) => {
   return (
     <li>
       {pageDict[url] ? (
-        <Link to={`/${pageDict[url].slug}`}>
-          {pageDict[url].title ?? `no title (${url})`}
-        </Link>
+        url === currentUrl ? (
+          pageDict[url].title ?? `no title (${url})`
+        ) : (
+          <Link to={`/${pageDict[url].slug}`}>
+            {pageDict[url].title ?? `no title (${url})`}
+          </Link>
+        )
       ) : (
         `page ${url} doesn't exist`
       )}
@@ -16,7 +20,7 @@ const ItemSublist = ({ pageDict, url, items }) => {
           {items.map(({ url: urlFraction, items }) => (
             <ItemSublist
               key={url + "/" + urlFraction}
-              {...{ pageDict, url: `${url}/${urlFraction}`, items }}
+              {...{ pageDict, url: `${url}/${urlFraction}`, items, currentUrl }}
             />
           ))}
         </ul>
@@ -63,6 +67,10 @@ const Sidebar = ({ location }) => {
   })
 
   const locationRoot = location.split("/").filter(a => !!a)[0]
+  const locationFormatted = location
+    .split("/")
+    .filter(a => !!a)
+    .join("/")
 
   const sidebarList = data.contentYaml.content.find(
     ({ url }) => url.split("/")[0] === locationRoot
@@ -75,12 +83,21 @@ const Sidebar = ({ location }) => {
   return (
     <nav style={{ minWidth: "250px", backgroundColor: "floralwhite" }}>
       <header style={{ textTransform: "uppercase" }}>
-        <Link to={"/" + locationRoot}>{sidebarTitle}</Link>
+        {locationFormatted === locationRoot ? (
+          sidebarTitle
+        ) : (
+          <Link to={"/" + locationRoot}>{sidebarTitle}</Link>
+        )}
       </header>
       <ul>
         {sidebarList.items.map(({ url, items }) => (
           <ItemSublist
-            {...{ pageDict, url: sidebarList.url + "/" + url, items }}
+            {...{
+              pageDict,
+              url: sidebarList.url + "/" + url,
+              items,
+              currentUrl: locationFormatted,
+            }}
             key={url}
           />
         ))}
