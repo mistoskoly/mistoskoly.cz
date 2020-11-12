@@ -1,42 +1,62 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
+import { Link, useStaticQuery, graphql } from "gatsby"
 import React from "react"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
-)
+const Header = ({ location }) => {
+  const data = useStaticQuery(graphql`
+    query {
+      allMdx {
+        edges {
+          node {
+            slug
+            headings(depth: h1) {
+              value
+            }
+          }
+        }
+      }
+      contentYaml {
+        content {
+          url
+        }
+      }
+    }
+  `)
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
+  const locationRoot = location.split("/").filter(a => !!a)[0]
 
-Header.defaultProps = {
-  siteTitle: ``,
+  if (!locationRoot) return null
+
+  const pageDict = {}
+
+  data.allMdx.edges.forEach(({ node: { slug, headings } }) => {
+    slug = slug
+      .split("/")
+      .filter(a => a)
+      .join("/")
+    pageDict[slug] = { slug, title: headings[0]?.value }
+  })
+
+  const headerItems = data.contentYaml.content.map(({ url }) => ({
+    url,
+    title: pageDict[url].title,
+  }))
+
+  return (
+    <header style={{ backgroundColor: "yellow", padding: "1rem" }}>
+      <nav style={{ display: "flex", justifyContent: "space-around" }}>
+        <Link to="/">místoškoly.cz</Link>
+        {headerItems.map(({ url, title }) =>
+          url === locationRoot ? (
+            <span key={url}>{title}</span>
+          ) : (
+            <Link to={`/${url}`} key={url}>
+              {title}
+            </Link>
+          )
+        )}
+      </nav>
+    </header>
+  )
 }
 
 export default Header

@@ -1,23 +1,22 @@
 import React from "react"
 import { useStaticQuery, graphql, Link } from "gatsby"
 
-const ItemSublist = ({ pageDict, url, items, topUrls = [] }) => {
-  console.log(pageDict, url, items)
-  const slug = [...topUrls, url].join("/")
+const ItemSublist = ({ pageDict, url, items }) => {
   return (
     <li>
-      {pageDict[slug] ? (
-        <Link to={`/${pageDict[slug].slug}`}>
-          {pageDict[slug].title ?? `no title (${slug})`}
+      {pageDict[url] ? (
+        <Link to={`/${pageDict[url].slug}`}>
+          {pageDict[url].title ?? `no title (${url})`}
         </Link>
       ) : (
-        `page ${slug} doesn't exist`
+        `page ${url} doesn't exist`
       )}
       {items?.length && (
         <ul>
-          {items.map(({ url: subUrl, items }) => (
+          {items.map(({ url: urlFraction, items }) => (
             <ItemSublist
-              {...{ pageDict, url: subUrl, items, topUrls: [...topUrls, url] }}
+              key={url + "/" + urlFraction}
+              {...{ pageDict, url: `${url}/${urlFraction}`, items }}
             />
           ))}
         </ul>
@@ -63,17 +62,30 @@ const Sidebar = ({ location }) => {
     pageDict[slug] = { slug, title: headings[0]?.value }
   })
 
-  console.log(pageDict)
+  const locationRoot = location.split("/").filter(a => !!a)[0]
+
+  const sidebarList = data.contentYaml.content.find(
+    ({ url }) => url.split("/")[0] === locationRoot
+  )
+
+  if (!sidebarList) return null
+
+  const sidebarTitle = pageDict[sidebarList.url].title
 
   return (
-    <div>
-      <i>{location}</i>
+    <nav style={{ minWidth: "250px", backgroundColor: "floralwhite" }}>
+      <header style={{ textTransform: "uppercase" }}>
+        <Link to={"/" + locationRoot}>{sidebarTitle}</Link>
+      </header>
       <ul>
-        {data.contentYaml.content.map(({ url, items }) => (
-          <ItemSublist {...{ pageDict, url, items }} />
+        {sidebarList.items.map(({ url, items }) => (
+          <ItemSublist
+            {...{ pageDict, url: sidebarList.url + "/" + url, items }}
+            key={url}
+          />
         ))}
       </ul>
-    </div>
+    </nav>
   )
 }
 
