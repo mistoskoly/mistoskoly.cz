@@ -43,12 +43,14 @@ const Header = ({ location }) => {
   }))
 
   return (
-    <header style={{ backgroundColor: "yellow", padding: "1rem" }}>
+    <header style={{ display: "flex" }}>
       <nav
         style={{
+          width: "250px",
           display: "flex",
-          justifyContent: "space-around",
           alignItems: "center",
+          justifyContent: "left",
+          padding: "0 1rem",
         }}
       >
         <Link
@@ -67,6 +69,17 @@ const Header = ({ location }) => {
           />{" "}
           místoškoly.cz
         </Link>
+      </nav>
+      <nav
+        style={{
+          flex: 1,
+          display: "flex",
+          justifyContent: "space-around",
+          backgroundColor: "yellow",
+          alignItems: "center",
+          padding: "1rem",
+        }}
+      >
         {headerItems.map(({ url, title }) =>
           url === locationRoot ? (
             <span key={url}>{title}</span>

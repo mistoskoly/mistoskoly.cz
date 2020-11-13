@@ -72,6 +72,8 @@ const Sidebar = ({ location }) => {
     .filter(a => !!a)
     .join("/")
 
+  console.log(data.contentYaml.content, locationRoot)
+
   const sidebarList = data.contentYaml.content.find(
     ({ url }) => url.split("/")[0] === locationRoot
   )
@@ -81,7 +83,13 @@ const Sidebar = ({ location }) => {
   const sidebarTitle = pageDict[sidebarList.url].title
 
   return (
-    <nav style={{ minWidth: "250px", backgroundColor: "floralwhite" }}>
+    <nav
+      style={{
+        width: "250px",
+        backgroundColor: "floralwhite",
+        padding: "1rem",
+      }}
+    >
       <header style={{ textTransform: "uppercase" }}>
         {locationFormatted === locationRoot ? (
           sidebarTitle
