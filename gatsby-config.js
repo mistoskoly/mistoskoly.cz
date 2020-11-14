@@ -1,11 +1,12 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `místoškoly.cz`,
+    description: `Empower youth in Czech republic to leave school.`,
+    author: `@mrkvon`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    "gatsby-plugin-styled-components",
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -24,18 +25,10 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/logo.png`, // This path is relative to the root of the site.
+        icon: `src/images/logo.png`,
       },
     },
     "gatsby-transformer-yaml",
-    /*
-    {
-      resolve: "gatsby-plugin-page-creator",
-      options: {
-        path: `${__dirname}/content/`,
-      },
-    },
-    */
     {
       resolve: "gatsby-plugin-mdx",
       options: {

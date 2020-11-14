@@ -1,6 +1,37 @@
 import { Link, useStaticQuery, graphql } from "gatsby"
 import React from "react"
 import logo from "../images/logo.png"
+import styled from "styled-components"
+
+const HomeLink = styled(Link)`
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+
+  .header-logo {
+    height: 2rem;
+    width: 2rem;
+    margin-right: 0.5rem;
+  }
+`
+
+const HomeNav = styled.nav`
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding: 0 1rem;
+`
+
+const ContentNav = styled.nav`
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  background-color: yellow;
+  align-items: center;
+  padding: 1rem;
+`
 
 const Header = ({ location }) => {
   const data = useStaticQuery(graphql`
@@ -44,42 +75,12 @@ const Header = ({ location }) => {
 
   return (
     <header style={{ display: "flex" }}>
-      <nav
-        style={{
-          width: "250px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "left",
-          padding: "0 1rem",
-        }}
-      >
-        <Link
-          to="/"
-          style={{
-            display: "flex",
-            flexWrap: "nowrap",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <img
-            src={logo}
-            alt="logo"
-            style={{ height: "2rem", width: "2rem", marginRight: "0.5rem" }}
-          />{" "}
-          místoškoly.cz
-        </Link>
-      </nav>
-      <nav
-        style={{
-          flex: 1,
-          display: "flex",
-          justifyContent: "space-around",
-          backgroundColor: "yellow",
-          alignItems: "center",
-          padding: "1rem",
-        }}
-      >
+      <HomeNav>
+        <HomeLink to="/">
+          <img src={logo} alt="logo" className="header-logo" /> místoškoly.cz
+        </HomeLink>
+      </HomeNav>
+      <ContentNav>
         {headerItems.map(({ url, title }) =>
           url === locationRoot ? (
             <span key={url}>{title}</span>
@@ -89,7 +90,7 @@ const Header = ({ location }) => {
             </Link>
           )
         )}
-      </nav>
+      </ContentNav>
     </header>
   )
 }
