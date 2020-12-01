@@ -1,5 +1,75 @@
 import React from "react"
 import { Link, useStaticQuery } from "gatsby"
+import { css } from "styled-components"
+import styled from "styled-components"
+
+/**
+ * A bottom navigation on page
+ * has Back and Next buttons
+ */
+
+const NeighbourNav = styled.nav`
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  margin: 0 -1rem -1rem -1rem;
+`
+
+const StyledLink = styled(Link)`
+  border: 2px solid #e0bb20;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  text-decoration: none;
+  color: black;
+  align-items: center;
+
+  &:hover {
+    background-color: #e0bb20;
+  }
+  display: flex;
+
+  ${({ back }) =>
+    !back &&
+    css`
+      & > span {
+        text-align: right;
+      }
+    `}
+
+  // add arrow to the button
+  &:before,
+  &:after {
+    // line-height: 0;
+  }
+  ${({ back }) =>
+    back
+      ? css`
+          &:before {
+            content: "\\2190";
+          }
+        `
+      : css`
+          &:after {
+            content: "\\2192";
+          }
+        `}
+
+  // style a direction text
+  &  .page-nav-direction-text {
+    font-size: 0.7em;
+    color: gray;
+  }
+`
+
+const PageNavigationLink = ({ back = false, to, children }) => (
+  <StyledLink to={to} back={back}>
+    <span>
+      <span class="page-nav-direction-text">{back ? "Zpět" : "Dál"}</span>
+      <br />
+      {children}
+    </span>
+  </StyledLink>
+)
 
 export default function Navigation({ location }) {
   const data = useStaticQuery(graphql`
@@ -47,30 +117,25 @@ export default function Navigation({ location }) {
   })
 
   return (
-    <nav
-      style={{
-        backgroundColor: "white",
-        display: "flex",
-        justifyContent: "space-between",
-        padding: "1rem",
-        margin: "0 -1rem -1rem -1rem",
-      }}
-    >
+    <NeighbourNav>
       {currentPagePosition > 0 ? (
-        <Link to={`/${sequence[currentPagePosition - 1].join("/")}`}>
-          &lsaquo;
+        <PageNavigationLink
+          to={`/${sequence[currentPagePosition - 1].join("/")}`}
+          back
+        >
           {pageDict[sequence[currentPagePosition - 1].join("/")]?.title}
-        </Link>
+        </PageNavigationLink>
       ) : (
         <i />
       )}
       {currentPagePosition < sequence.length - 1 && (
-        <Link to={`/${sequence[currentPagePosition + 1].join("/")}`}>
+        <PageNavigationLink
+          to={`/${sequence[currentPagePosition + 1].join("/")}`}
+        >
           {pageDict[sequence[currentPagePosition + 1].join("/")]?.title}
-          &rsaquo;
-        </Link>
+        </PageNavigationLink>
       )}
-    </nav>
+    </NeighbourNav>
   )
 }
 
