@@ -3,6 +3,35 @@ import callitschoolVideo from "../images/callitschool.mp4"
 import callitschoolThumbnail from "../images/callitschool.png"
 import { Link } from "gatsby"
 import styled from "styled-components"
+import Logo from '../components/logo';
+
+const LogoLink = styled(Link)`
+  text-decoration: none;
+  display: block;
+  padding: 0.725rem 1rem;
+  color: black;
+`;
+
+const Footer = styled.footer`
+  background-color: #e0bb20;
+  color: black;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  a {
+    color: black;
+    text-decoration: none;
+    padding: 0.8rem;
+    margin: 0.2rem;
+
+    &:hover {
+      color: #e0bb20;
+      background-color: white;
+    }
+  }
+`
 
 const Title = styled.header`
   position: relative;
@@ -46,6 +75,8 @@ const StartButton = styled(Link)`
   border-radius: 1rem;
 `
 
+const ContentLink = styled(Link)``
+
 const BackgroundVideo = styled.video`
   object-fit: cover;
   width: 100vw;
@@ -78,6 +109,8 @@ const ContentItem = styled.li`
   position: relative;
   margin: 1rem 0;
   line-height: 1.2;
+  border: 5px solid #e0bb20;
+
   @media (max-width: 900px) {
     width: 40vw;
     height: 40vw;
@@ -87,20 +120,26 @@ const ContentItem = styled.li`
     width: 60vw;
     height: 60vw;
   }
-`
 
-const ContentLink = styled(Link)`
-  width: 100%;
-  height: 100%;
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  text-decoration: none;
-  background-color: darkgrey;
-  color: white;
-  font-size: 2rem;
+  ${ContentLink} {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    font-size: 1.8rem;
+  }
+
+  &:hover {
+    border-color: black;
+    ${ContentLink} {
+      color: #e0bb20;
+    }
+  }
 `
 
 const ContentIntro = styled.div`
@@ -129,7 +168,8 @@ const Index = () => {
         <StartButton to="#uvod-obsah">&#x2304;</StartButton>
       </StartButtonContainer>
 
-      <Content id="uvod-obsah">
+    <Content id="uvod-obsah">
+        <LogoLink to="/"><Logo /></LogoLink>
         <ContentIntro>tady se dozvíš</ContentIntro>
         <ContentList>
           <ContentItem>
@@ -146,6 +186,10 @@ const Index = () => {
           </ContentItem>
         </ContentList>
       </Content>
+      <Footer>
+        <Link to="/pro-rodice">pro rodiče</Link>
+        <Link to="/tlh">Teenage Liberation Handbook</Link>
+      </Footer>
     </>
   )
 }

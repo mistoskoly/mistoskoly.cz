@@ -1,7 +1,7 @@
 import { Link, useStaticQuery, graphql } from "gatsby"
 import React from "react"
-import logo from "../images/logo.svg"
 import styled from "styled-components"
+import Logo from './logo';
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -17,18 +17,6 @@ const HeaderContainer = styled.header`
   }
 `
 
-const HomeLink = styled(Link)`
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-
-  .header-logo {
-    height: 2rem;
-    width: 2rem;
-    margin-right: 0.5rem;
-  }
-`
 
 const HomeNav = styled.nav`
   width: 250px;
@@ -94,9 +82,9 @@ const Header = ({ location }) => {
   return (
     <HeaderContainer>
       <HomeNav>
-        <HomeLink to="/">
-          <img src={logo} alt="logo" className="header-logo" /> místoškoly.cz
-        </HomeLink>
+        <Link to="/#uvod-obsah">
+          <Logo />
+        </Link>
       </HomeNav>
       <ContentNav>
         {headerItems.map(({ url, title }) =>
