@@ -1,6 +1,6 @@
 import { Link, useStaticQuery, graphql } from "gatsby"
 import React from "react"
-import logo from "../images/logo.png"
+import logo from "../images/logo.svg"
 import styled from "styled-components"
 
 const HomeLink = styled(Link)`
