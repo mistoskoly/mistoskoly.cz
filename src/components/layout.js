@@ -10,7 +10,6 @@ import styled from "styled-components"
 
 const ContentWrapper = styled.div`
   flex: 1;
-  background-color: #fafafa;
   padding: 1rem;
   h1 {
     color: #e0bb20;

@@ -9,7 +9,7 @@ content:
       - url: uceni
         items:
           - url: knihovny
-#          - url: skola
+          - url: skola
 #          - url: veda
 #          - url: spolecenske-vedy
 #          - url: matematika

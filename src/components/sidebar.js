@@ -1,33 +1,90 @@
 import React from "react"
 import { useStaticQuery, graphql, Link } from "gatsby"
+import styled, { css } from "styled-components"
 
-const ItemSublist = ({ pageDict, url, items, currentUrl }) => {
-  return (
-    <li>
-      {pageDict[url] ? (
-        url === currentUrl ? (
-          pageDict[url].title ?? `no title (${url})`
-        ) : (
-          <Link to={`/${pageDict[url].slug}`}>
-            {pageDict[url].title ?? `no title (${url})`}
-          </Link>
-        )
-      ) : (
-        <i>{url}</i>
-      )}
-      {items?.length && (
-        <ul>
-          {items.map(({ url: urlFraction, items }) => (
-            <ItemSublist
+const ListTreeHeader = ({ url, children, className }) => (
+  <header className={className}>
+    <Link to={url}>{children}</Link>
+  </header>
+)
+
+const StyledListTreeHeader = styled(ListTreeHeader)`
+  a {
+    text-decoration: none;
+    display: block;
+    color: #555;
+    padding: 0.2rem;
+  }
+  ${({ depth }) =>
+    depth === 0 &&
+    css`
+      text-transform: uppercase;
+      margin-top: 1em;
+    `}
+  ${({ depth }) =>
+    css`
+      a {
+        padding-left: ${depth * 1.5 + 1}em;
+      }
+    `}
+  ${({ exists }) =>
+    !exists &&
+    css`
+      font-style: italic;
+    `}
+  ${({ selected }) =>
+    selected &&
+    css`
+      background-color: #fafafa;
+      font-weight: bold;
+      && a {
+        color: #e0bb20;
+      }
+    `}
+  &:hover a {
+    color: #e0bb20;
+  }
+`
+
+const StyledListTree = styled.div`
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  li {
+    margin: 0;
+    padding: 0;
+  }
+`
+
+const ListTree = ({ pageDict, url, items, currentUrl, depth = 0 }) => (
+  <StyledListTree depth={depth}>
+    <StyledListTreeHeader
+      exists={!!pageDict[url]}
+      selected={url === currentUrl}
+      depth={depth}
+      url={pageDict[url] ? `/${pageDict[url]?.slug}` : "/" + url}
+    >
+      {pageDict[url]?.title ?? `(${url})`}
+    </StyledListTreeHeader>
+    {items?.length && (
+      <ul>
+        {items.map(({ url: urlFraction, items }) => (
+          <li>
+            <ListTree
               key={url + "/" + urlFraction}
-              {...{ pageDict, url: `${url}/${urlFraction}`, items, currentUrl }}
+              url={url + "/" + urlFraction}
+              depth={depth + 1}
+              {...{ pageDict, items, currentUrl }}
             />
-          ))}
-        </ul>
-      )}
-    </li>
-  )
-}
+          </li>
+        ))}
+      </ul>
+    )}
+  </StyledListTree>
+)
 
 const Sidebar = ({ location }) => {
   const data = useStaticQuery(graphql`
@@ -72,45 +129,24 @@ const Sidebar = ({ location }) => {
     .filter(a => !!a)
     .join("/")
 
-  console.log(data.contentYaml.content, locationRoot)
-
   const sidebarList = data.contentYaml.content.find(
     ({ url }) => url.split("/")[0] === locationRoot
   )
 
   if (!sidebarList) return null
 
-  const sidebarTitle = pageDict[sidebarList.url].title
-
   return (
     <nav
       style={{
         width: "250px",
-        padding: "1rem",
       }}
     >
-      <header style={{ textTransform: "uppercase" }}>
-        {locationFormatted === locationRoot ? (
-          sidebarTitle
-        ) : (
-          <Link to={"/" + locationRoot}>{sidebarTitle}</Link>
-        )}
-      </header>
-      {sidebarList.items && (
-        <ul>
-          {sidebarList.items.map(({ url, items }) => (
-            <ItemSublist
-              {...{
-                pageDict,
-                url: sidebarList.url + "/" + url,
-                items,
-                currentUrl: locationFormatted,
-              }}
-              key={url}
-            />
-          ))}
-        </ul>
-      )}
+      <ListTree
+        items={sidebarList.items}
+        pageDict={pageDict}
+        currentUrl={locationFormatted}
+        url={sidebarList.url}
+      />
     </nav>
   )
 }
