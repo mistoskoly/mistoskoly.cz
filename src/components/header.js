@@ -3,6 +3,20 @@ import React from "react"
 import logo from "../images/logo.svg"
 import styled from "styled-components"
 
+const HeaderContainer = styled.header`
+  display: flex;
+  background-color: #e0bb20;
+  & a {
+    color: black;
+  }
+  a {
+    text-decoration: none;
+    &:hover {
+      font-weight: bold;
+    }
+  }
+`
+
 const HomeLink = styled(Link)`
   display: flex;
   flex-wrap: nowrap;
@@ -28,17 +42,6 @@ const ContentNav = styled.nav`
   flex: 1;
   display: flex;
   justify-content: space-around;
-  background-color: #e0bb20;
-  &,
-  & a {
-    color: black;
-  }
-  a {
-    text-decoration: none;
-    &:hover {
-      font-weight: bold;
-    }
-  }
 
   .selected {
     font-weight: bold;
@@ -89,7 +92,7 @@ const Header = ({ location }) => {
   }))
 
   return (
-    <header style={{ display: "flex" }}>
+    <HeaderContainer>
       <HomeNav>
         <HomeLink to="/">
           <img src={logo} alt="logo" className="header-logo" /> místoškoly.cz
@@ -108,7 +111,7 @@ const Header = ({ location }) => {
           )
         )}
       </ContentNav>
-    </header>
+    </HeaderContainer>
   )
 }
 

@@ -86,7 +86,6 @@ const Sidebar = ({ location }) => {
     <nav
       style={{
         width: "250px",
-        backgroundColor: "floralwhite",
         padding: "1rem",
       }}
     >
