@@ -28,7 +28,22 @@ const ContentNav = styled.nav`
   flex: 1;
   display: flex;
   justify-content: space-around;
-  background-color: yellow;
+  background-color: #e0bb20;
+  &,
+  & a {
+    color: black;
+  }
+  a {
+    text-decoration: none;
+    &:hover {
+      font-weight: bold;
+    }
+  }
+
+  .selected {
+    font-weight: bold;
+  }
+
   align-items: center;
   padding: 1rem;
 `
@@ -83,7 +98,9 @@ const Header = ({ location }) => {
       <ContentNav>
         {headerItems.map(({ url, title }) =>
           url === locationRoot ? (
-            <span key={url}>{title}</span>
+            <span className="selected" key={url}>
+              {title}
+            </span>
           ) : (
             <Link to={`/${url}`} key={url}>
               {title}

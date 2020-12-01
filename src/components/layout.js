@@ -6,6 +6,16 @@ import Sidebar from "./sidebar"
 import Header from "./header"
 import Navigation from "./navigation"
 import "./layout.css"
+import styled from "styled-components"
+
+const ContentWrapper = styled.div`
+  flex: 1;
+  background-color: #fafafa;
+  padding: 1rem;
+  h1 {
+    color: #e0bb20;
+  }
+`
 
 const shortcodes = { Link }
 
@@ -15,12 +25,12 @@ export default function PageTemplate({ data: { mdx }, location }) {
       <Header location={location.pathname} />
       <div style={{ display: "flex" }}>
         <Sidebar location={location.pathname} />
-        <div style={{ flex: 1, backgroundColor: "pink", padding: "1rem" }}>
+        <ContentWrapper>
           <MDXProvider components={shortcodes}>
             <MDXRenderer>{mdx.body}</MDXRenderer>
           </MDXProvider>
           <Navigation location={location.pathname} />
-        </div>
+        </ContentWrapper>
       </div>
     </div>
   )
