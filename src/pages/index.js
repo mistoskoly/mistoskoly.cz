@@ -4,6 +4,7 @@ import callitschoolThumbnail from "../images/callitschool.png"
 import { Link } from "gatsby"
 import styled from "styled-components"
 import Logo from '../components/logo';
+import '../components/layout.css';
 
 const LogoLink = styled(Link)`
   text-decoration: none;
