@@ -4,6 +4,9 @@ content:
       - url: svoboda
       - url: nuda
   - url: jak
+    items:
+      - url: rodice
+      - url: legal
   - url: venku
     items:
       - url: uceni

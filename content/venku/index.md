@@ -1,4 +1,4 @@
-# Co dělat venku
+# Co dělat místo školy
 
 ## Učení
 
