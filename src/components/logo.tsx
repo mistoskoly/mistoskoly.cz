@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react"
+import styled from "styled-components"
 import logo from "../images/logo.svg"
 
 const LogoContainer = styled.div`
@@ -19,4 +19,4 @@ const Logo = () => (
   </LogoContainer>
 )
 
-export default Logo;
+export default Logo

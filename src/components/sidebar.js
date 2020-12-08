@@ -72,9 +72,8 @@ const ListTree = ({ pageDict, url, items, currentUrl, depth = 0 }) => (
     {items?.length && (
       <ul>
         {items.map(({ url: urlFraction, items }) => (
-          <li>
+          <li key={url + "/" + urlFraction}>
             <ListTree
-              key={url + "/" + urlFraction}
               url={url + "/" + urlFraction}
               depth={depth + 1}
               {...{ pageDict, items, currentUrl }}

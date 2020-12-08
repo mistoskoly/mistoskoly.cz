@@ -1,7 +1,7 @@
 import { Link, useStaticQuery, graphql } from "gatsby"
 import React from "react"
 import styled from "styled-components"
-import Logo from './logo';
+import Logo from "./logo"
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -16,7 +16,6 @@ const HeaderContainer = styled.header`
     }
   }
 `
-
 
 const HomeNav = styled.nav`
   width: 250px;

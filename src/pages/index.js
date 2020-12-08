@@ -3,15 +3,15 @@ import callitschoolVideo from "../images/callitschool.mp4"
 import callitschoolThumbnail from "../images/callitschool.png"
 import { Link } from "gatsby"
 import styled from "styled-components"
-import Logo from '../components/logo';
-import '../components/layout.css';
+import Logo from "../components/logo"
+import "../components/layout.css"
 
 const LogoLink = styled(Link)`
   text-decoration: none;
   display: block;
   padding: 0.725rem 1rem;
   color: black;
-`;
+`
 
 const Footer = styled.footer`
   background-color: #e0bb20;
@@ -169,8 +169,10 @@ const Index = () => {
         <StartButton to="#uvod-obsah">&#x2304;</StartButton>
       </StartButtonContainer>
 
-    <Content id="uvod-obsah">
-        <LogoLink to="/"><Logo /></LogoLink>
+      <Content id="uvod-obsah">
+        <LogoLink to="/">
+          <Logo />
+        </LogoLink>
         <ContentIntro>tady se dozvíš</ContentIntro>
         <ContentList>
           <ContentItem>

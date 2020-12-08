@@ -1,7 +1,6 @@
 import React from "react"
 import { Link, useStaticQuery } from "gatsby"
-import { css } from "styled-components"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
 /**
  * A bottom navigation on page
@@ -15,7 +14,7 @@ const NeighbourNav = styled.nav`
   margin: 0 -1rem -1rem -1rem;
 `
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(({ back, ...rest }) => <Link {...rest} />)`
   border: 2px solid #e0bb20;
   padding: 0.5em;
   border-radius: 0.5em;
@@ -64,7 +63,7 @@ const StyledLink = styled(Link)`
 const PageNavigationLink = ({ back = false, to, children }) => (
   <StyledLink to={to} back={back}>
     <span>
-      <span class="page-nav-direction-text">{back ? "Zpět" : "Dál"}</span>
+      <span className="page-nav-direction-text">{back ? "Zpět" : "Dál"}</span>
       <br />
       {children}
     </span>
