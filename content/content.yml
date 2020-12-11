@@ -3,6 +3,7 @@ content:
     items:
       - url: svoboda
       - url: nuda
+      - url: skola
   - url: jak
     items:
       - url: rodice
@@ -20,4 +21,6 @@ content:
 #          - url: cizy-jazyky
 #          - url: umeni
 #          - url: sport-a-atletika
+          - url: zkousky 
+      - url: cas
   - url: spolecne
