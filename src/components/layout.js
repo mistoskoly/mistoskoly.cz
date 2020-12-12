@@ -6,7 +6,6 @@ import TableOfContents from "./sidebar"
 import ArticleContents from "./article-contents"
 import Header from "./header"
 import Navigation from "./navigation"
-import "./layout.css"
 import styled from "styled-components"
 import * as colors from "../styles/colors"
 
