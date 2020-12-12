@@ -32,6 +32,12 @@ const ArticleNavigation = styled.nav`
   width: 200px;
   line-height: 1.05em;
 
+  .close-nav,
+  .open-nav {
+    position: absolute;
+    right: 0;
+  }
+
   &.navigation-fixed {
     position: fixed;
   }
@@ -53,6 +59,11 @@ const ArticleNavigation = styled.nav`
       margin: 0;
       padding: 0;
     }
+  }
+
+  & > ul {
+    border-left: 2px solid lightgrey;
+    padding: 0.1px;
   }
 `
 
@@ -79,8 +90,8 @@ const NestedList = ({ url, title, items, depth = 0 }) => (
   </>
 )
 
-const ArticleContents = ({ toc }) => (
-  <ArticleNavigation>
+const ArticleContents = ({ toc, ...rest }) => (
+  <ArticleNavigation {...rest}>
     <NestedList {...toc} />
   </ArticleNavigation>
 )

@@ -85,7 +85,7 @@ const ListTree = ({ pageDict, url, items, currentUrl, depth = 0 }) => (
   </StyledListTree>
 )
 
-const Sidebar = ({ location }) => {
+const Sidebar = ({ location, ...rest }) => {
   const data = useStaticQuery(graphql`
     query {
       allMdx {
@@ -139,6 +139,7 @@ const Sidebar = ({ location }) => {
       style={{
         width: "250px",
       }}
+      {...rest}
     >
       <ListTree
         items={sidebarList.items}

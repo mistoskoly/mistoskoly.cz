@@ -3,6 +3,14 @@ import React from "react"
 import styled from "styled-components"
 import Logo from "./logo"
 
+const HomeNav = styled.nav`
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding: 0 1rem;
+`
+
 const HeaderContainer = styled.header`
   display: flex;
   background-color: #e0bb20;
@@ -15,14 +23,12 @@ const HeaderContainer = styled.header`
       font-weight: bold;
     }
   }
-`
 
-const HomeNav = styled.nav`
-  width: 250px;
-  display: flex;
-  align-items: center;
-  justify-content: left;
-  padding: 0 1rem;
+  @media (max-width: 600px) {
+    ${HomeNav} {
+      width: initial;
+    }
+  }
 `
 
 const ContentNav = styled.nav`
@@ -36,6 +42,10 @@ const ContentNav = styled.nav`
 
   align-items: center;
   padding: 1rem;
+
+  @media (max-width: 900px) {
+    flex-wrap: wrap;
+  }
 `
 
 const Header = ({ location }) => {
@@ -86,17 +96,15 @@ const Header = ({ location }) => {
         </Link>
       </HomeNav>
       <ContentNav>
-        {headerItems.map(({ url, title }) =>
-          url === locationRoot ? (
-            <span className="selected" key={url}>
-              {title}
-            </span>
-          ) : (
-            <Link to={`/${url}`} key={url}>
-              {title}
-            </Link>
-          )
-        )}
+        {headerItems.map(({ url, title }) => (
+          <Link
+            className={url === locationRoot && "selected"}
+            to={`/${url}`}
+            key={url}
+          >
+            {title}
+          </Link>
+        ))}
       </ContentNav>
     </HeaderContainer>
   )

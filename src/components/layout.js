@@ -9,6 +9,18 @@ import Navigation from "./navigation"
 import styled from "styled-components"
 import * as colors from "../styles/colors"
 
+const StyledArticleContents = styled(ArticleContents)`
+  @media (max-width: 900px) {
+    display: none;
+  }
+`
+
+const StyledTOC = styled(TableOfContents)`
+  @media (max-width: 600px) {
+    display: none;
+  }
+`
+
 const ContentWrapper = styled.div`
   flex: 1;
   padding: 1rem;
@@ -46,14 +58,14 @@ export default function PageTemplate({ data: { mdx }, location }) {
     <div>
       <Header location={location.pathname} />
       <div style={{ display: "flex" }}>
-        <TableOfContents location={location.pathname} />
+        <StyledTOC location={location.pathname} />
         <ContentWrapper>
           <MDXProvider components={shortcodes}>
             <MDXRenderer>{mdx.body}</MDXRenderer>
           </MDXProvider>
           <Navigation location={location.pathname} />
         </ContentWrapper>
-        <ArticleContents toc={mdx.tableOfContents} />
+        <StyledArticleContents toc={mdx.tableOfContents} />
       </div>
     </div>
   )
