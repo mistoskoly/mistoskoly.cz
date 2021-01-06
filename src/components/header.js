@@ -98,7 +98,7 @@ const Header = ({ location }) => {
       <ContentNav>
         {headerItems.map(({ url, title }) => (
           <Link
-            className={url === locationRoot && "selected"}
+            className={url === locationRoot ? "selected" : undefined}
             to={`/${url}`}
             key={url}
           >
