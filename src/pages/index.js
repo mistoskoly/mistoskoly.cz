@@ -64,15 +64,11 @@ const StartButton = styled(Link)`
     color: black;
     background-color: white;
   }
-  font-size: 6rem;
   text-decoration: none;
-  line-height: 0;
-
-  height: 3rem;
-  display: flex;
   align-items: center;
-  padding-bottom: 2.2rem;
-  border-radius: 1rem;
+  padding: 0.3rem;
+  border-radius: 1.1rem;
+  font-size: 2.5rem;
 `
 
 const ContentLink = styled(Link)``
@@ -165,7 +161,9 @@ const Index = () => {
       </BackgroundVideo>
       <Title>Můžeš odejít ze školy!</Title>
       <StartButtonContainer>
-        <StartButton to="#uvod-obsah">&#x2304;</StartButton>
+        <StartButton to="#uvod-obsah">
+          <i className="icon-arrow-down" />
+        </StartButton>
       </StartButtonContainer>
 
       <Content id="uvod-obsah">

@@ -7,3 +7,4 @@
 import "./src/styles/normalize.css"
 import "./src/styles/reset.css"
 import "./src/styles/global.css"
+import "./src/styles/fontello/css/fontello.css"
