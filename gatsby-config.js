@@ -36,5 +36,6 @@ module.exports = {
         gatsbyRemarkPlugins: ["gatsby-remark-autolink-headers"],
       },
     },
+    "gatsby-plugin-catch-links",
   ],
 }
