@@ -8,6 +8,10 @@ Protože se budeš učit lépe, když tam nebudeš.
 
 Protože ve škole je [nuda](/proc/nuda).
 
-Protože škola je (skoro úplná) ztráta času.
+Protože škola je [ztráta času](/proc/cas).
 
 Protože škola je vězení.
+
+Ve škole nezjistíš, na čem ti záleží a co je pro tebe důležité.
+
+Protože škola k ničemu není.

@@ -2,12 +2,15 @@ content:
   - url: proc
     items:
       - url: svoboda
+      - url: smysl
       - url: nuda
-      - url: skola
+      - url: cas
+      - url: kcemu
   - url: jak
     items:
       - url: rodice
       - url: legal
+      - url: pratelske-skoly
   - url: venku
     items:
       - url: uceni
